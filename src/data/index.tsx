@@ -12,7 +12,7 @@ export const productList : IProduct[]= [
       "description": "A timeless and sophisticated black dress perfect for any occasion.",
       "imageURL": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
       "price": "79.99",
-      "colors": ["Black", "Navy Blue", "Red"],
+      "colors": ["Black", " gold", "Red"],
       "category": {
         "name": "Women's Clothing",
         "imageURL": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
@@ -24,7 +24,7 @@ export const productList : IProduct[]= [
       "description": "A stylish and comfortable sofa with a contemporary design.",
       "imageURL": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
       "price": "999.99",
-      "colors": ["Gray", "Beige", "Dark Brown"],
+      "colors": [ "Black","Blue", "Gray"],
       "category": {
         "name": "Furniture",
         "imageURL": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
@@ -36,7 +36,7 @@ export const productList : IProduct[]= [
       "description": "High-quality wireless headphones with exceptional sound and long battery life.",
       "imageURL": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
       "price": "149.99",
-      "colors": ["White", "Black", "Rose Gold"],
+      "colors": ["Black", "red", " Gold"],
       "category": {
         "name": "Electronics",
         "imageURL": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
@@ -48,7 +48,7 @@ export const productList : IProduct[]= [
       "description": "Comfortable and stylish sneakers for everyday wear.",
       "imageURL":"https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
       "price":"69.99" ,
-      "colors": ["Blue", "White", "Gray"],
+      "colors": ["Blue", "Black", "Gray"],
       "category": {
         "name": "Shoes",
         "imageURL": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
@@ -108,7 +108,7 @@ export const productList : IProduct[]= [
       "description": "A sleek and modern coffee table with a glass top.",
       "imageURL": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
       "price": "299.99",
-      "colors": ["Brown", "White", "Black"],
+      "colors": ["Brown", "red", "Black"],
       "category": {
         "name": "Furniture",
         "imageURL": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg"

@@ -48,7 +48,6 @@ const [products, setProducts] = useState<IProduct[]> (productList);
  //temp state 
 
  const [tempColors, setTempColors] = useState <string[]>([]);
- console.log(tempColors)
 
 
   // State for errors and product
@@ -89,11 +88,11 @@ const [products, setProducts] = useState<IProduct[]> (productList);
 
   // Modal state
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenToEdid, setIsOpenToEdid] = useState(false);
+  const [isOpenToEdit, setIsOpenToEdid] = useState(false);
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   
     // Open and close modal functions
-  const  closeModal = () =>  setIsOpen(false);
+  const closeModal = () =>  setIsOpen(false);
   const openModal = () => setIsOpen(true);
    
   const closeModalEdit = () => setIsOpenToEdid(false);
@@ -145,13 +144,12 @@ const [products, setProducts] = useState<IProduct[]> (productList);
         if (tempColors.includes(color)) {
           //correct 
           setTempColors(prev => prev.filter(item => item !== color));
-        } else {
-          setTempColors(prev => [...prev, color]);
-        }
-
+          return;
+        } 
         if (productEdit.colors.includes(color)) {
-          //correct 
+          
           setTempColors(prev => prev.filter(item => item !== color));
+          return;
         } else {
           setTempColors(prev => [...prev, color]);
         }
@@ -199,6 +197,7 @@ const [products, setProducts] = useState<IProduct[]> (productList);
    const onCancel = () => {
     setProduct(defaultProductObj);
     closeModal();
+    closeModalEdit();
   };
 
   // Handle Edit submission
@@ -206,26 +205,28 @@ const [products, setProducts] = useState<IProduct[]> (productList);
     event.preventDefault();
     const { title, description, imageURL, price } = productEdit;
     const errors = productValidation({
-      title,
-      description,
-      imageURL,
-      price,
+        title,
+        description,
+        imageURL,
+        price,
     });
   
-    const hasErrorMsg = Object.values(errors).some(value => value !== "") && Object.values(errors).every(value => value === "");
-  
+    
+    const hasErrorMsg = Object.values(errors).some(value => value === "") && Object.values(errors).every(value => value === "");
+
     if (!hasErrorMsg) {
-      setErrors(errors);
-      return;
+        setErrors(errors);
+        return;
     }
-  
+
     const updateProducts = [...products];
-    updateProducts[productEditIdx]= {...productEdit, colors:tempColors.concat(productEdit.colors)};
-    setProducts(updateProducts)
+    updateProducts[productEditIdx] = { ...productEdit, colors: tempColors.concat(productEdit.colors) };
+    setProducts(updateProducts);
     setProductEdit(defaultProductObj);
     setTempColors([]);
     closeModalEdit();
-  };
+                      
+};
 
     
   // Handle form submission
@@ -295,33 +296,35 @@ const [products, setProducts] = useState<IProduct[]> (productList);
 
       {/* Edit Modal */} 
 
-      <Modal isOpen={isOpenToEdid} closeModal={closeModalEdit} title="Edit Product">
-       <form className="space-y-3" onSubmit={submitEditHandler}>
-        {renderProductEditWithErrorMsg('title', 'product title', 'title')}
-        {renderProductEditWithErrorMsg('description', 'product description', 'description')}
-        {renderProductEditWithErrorMsg('imageURL', 'product imageURL', 'imageURL')}
-        {renderProductEditWithErrorMsg('price', 'product price', 'price')}
-        <Select selected={productEdit.category} setSelected={(value) => setProductEdit({...productEdit,category:value}) } />
-         {/* {renderFormInput} */}
-            <div className="flex items-center space-x-1">
-            {renderCircleColors}
-          </div>
+      <Modal isOpen={isOpenToEdit} closeModal={closeModalEdit} title="Edit Product">
+  <form className="space-y-3" onSubmit={submitEditHandler}>
+    {renderProductEditWithErrorMsg('title', 'Product Title', 'title')}
+    {renderProductEditWithErrorMsg('description', 'Product Description', 'description')}
+    {renderProductEditWithErrorMsg('imageURL', 'Product Image URL', 'imageURL')}
+    {renderProductEditWithErrorMsg('price', 'Product Price', 'price')}
+    
+    <Select selected={productEdit.category} setSelected={(value) => setProductEdit({ ...productEdit, category: value })} />
 
-          <div className="flex items-center space-x-1">
-            {tempColors.concat(productEdit.colors).map(color => (
-              <span key={color} className="p-1 mr-1 mb-1 rounded-md text-xs text-white" style={{background:color}}>{color}</span>
-            ))}
-          </div>
-         
+    <div className="flex items-center space-x-1">
+      {renderCircleColors}
+    </div>
 
-          <div className="flex items-center space-x-3">
-            <Button className="bg-indigo-900 hover:bg-indigo-900">Submit</Button>
-            <Button className="bg-gray-600 hover:bg-gray-900" onClick={onCancel}>
-              Cancel
-            </Button>
-          </div> 
-        </form> 
-      </Modal>
+    <div className="flex items-center space-x-1">
+      {tempColors.concat(productEdit.colors).map(color => (
+        <span key={color} className="p-1 mr-1 mb-1 rounded-md text-xs text-white" style={{ background: color }}>
+          {color}
+        </span>
+      ))}
+    </div>
+
+    <div className="flex items-center space-x-3">
+      <Button className="bg-indigo-900 hover:bg-indigo-900">Submit</Button>
+      <Button className="bg-gray-600 hover:bg-gray-900" onClick={onCancel}>
+        Cancel
+      </Button>
+    </div>
+  </form>
+</Modal>
 
       {/* delete product modal */}
 
