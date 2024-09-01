@@ -257,7 +257,7 @@ const [products, setProducts] = useState<IProduct[]> (productList);
 
   return (
     <div className="container">
-      <Button className="bg-indigo-900 hover:bg-indigo-900" onClick={openModal}>
+      <Button className="bg-indigo-900 hover:bg-indigo-900 my-4" onClick={openModal}>
         ADD
       </Button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 p-2 m-5 rounded-md">
